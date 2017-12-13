@@ -1,4 +1,9 @@
-def compounding_interest(interest_rate, time_frame, starting_point, monthly_deposit, months_after_trust):
+def compounding_interest(interest_rate,
+                         time_frame,
+                         starting_point,
+                         monthly_deposit,
+                         months_after_trust):
+
     monthly_interest = (float(interest_rate) / 100) / 12
     monthly_total = starting_point + monthly_deposit
 
@@ -8,15 +13,20 @@ def compounding_interest(interest_rate, time_frame, starting_point, monthly_depo
     while months_after_trust > 0:
         monthly_total += (monthly_total * monthly_interest)
         months_after_trust -= 1
+
     return "Compounded Savings: %d" % monthly_total
 
 
-def mortgage_payoff(interest_rate, origninal_months, starting_point, additional_monthly_payment,
-                    months_with_additional, payment_after_trust):
+def mortgage_payoff(interest_rate,
+                    origninal_months,
+                    starting_point,
+                    additional_monthly_payment,
+                    months_with_additional,
+                    payment_after_trust):
+
     principal_owed = starting_point
     monthly_interest_rate = (float(interest_rate) / 100) / 12
     time_frame = 0
-    total_paid = 0
     excess_payment = 0
     principal_payments = 0
     post_trust_payments = 0
@@ -40,6 +50,7 @@ def mortgage_payoff(interest_rate, origninal_months, starting_point, additional_
     print "Total contribution of excess payment: %d" % (excess_payment + post_trust_payments)
     print "Months to pay off: %d" % time_frame
 
+print "Here be the mortgages"
 
 print mortgage_payoff(4.125 , 360, 96000, 746.12, 54, 200)
 #print mortgage_payoff(4.125 , 360, 96000, 0, 0, 0)
