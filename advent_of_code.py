@@ -13,7 +13,8 @@ def checksum(input):
     split_rows = numbers.split("\n")
     string_lists = []
     number_lists = []
-    difference_list = []
+    sorted_lists = []
+    divided_list = []
     sum = 0
 
     for item in split_rows:
@@ -25,11 +26,23 @@ def checksum(input):
             formatted_numbers.append(int(string_numbers))
         number_lists.append(formatted_numbers)
     for item in number_lists:
-        difference = max(item) - min(item)
-        difference_list.append(difference)
-    for item in difference_list:
+        sorted_lists.append(sorted(item, key=int, reverse=True))
+    for item in sorted_lists:
+        x = -1
+        while x < len(item):
+            x += 1
+            y = x + 1
+            while y < len(item):
+                if item[x] % item[y] == 0:
+                    divided_list.append(item[x]/item[y])
+                    x = len(item) + 1
+                    break
+                else:
+                    y += 1
+    for item in divided_list:
         sum +=item
 
+    print(number_lists)
     print(sum)
 
 
