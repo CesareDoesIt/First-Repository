@@ -35,16 +35,16 @@ def extract_usable_text(extracted_pages):
         payment_splitter = re.findall("Y*o*u*-M*o*b*i*l*e*-\d+.\d\d", text)
 
         if "Description$ Amount" in text:
-            split_text = text.split("Description$ Amount", 1)
+            split_text = text.split("Description$ Amount")
             text = str(split_text[1])
         if "Thank You-Mobile-" in text:
-            split_text = text.split(payment_splitter[0], 1)
+            split_text = text.split(payment_splitter[0])
             text = str(split_text[1])
         if "Total fees charged in" in text:
-            split_text = text.split("Total fees charged in", 1)
+            split_text = text.split("Total fees charged in")
             text = str(split_text[0])
         if "CARDMEMBER SERVICEPO" in text:
-            split_text = text.split("CARDMEMBER SERVICEPO", 1)
+            split_text = text.split("CARDMEMBER SERVICEPO")
             text = str(split_text[0])
         edited_text.append(text)
 
