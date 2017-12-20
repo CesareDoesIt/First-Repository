@@ -1,12 +1,61 @@
 from aocd import get_data
+import re
 
-#session="53616c7465645f5f4812c0eed899485e9e63507b133fcfbe379ae7ec1e1b079ec98f2fb252334cca442f15e78dd50899"
+session="53616c7465645f5f4812c0eed899485e9e63507b133fcfbe379ae7ec1e1b079ec98f2fb252334cca442f15e78dd50899"
 #my_data = get_data(session, day=2, year=2017)
 #print(my_data)
 
-#my_data = get_data(session, day=3, year=2017)
+my_data = get_data(session, day=4, year=2017)
 #print(my_data)
 
+
+def passphrase_possibilities(letter_sequences):
+
+    rows_list = []
+    word_rows_split = []
+    sorted_lines = []
+    sorted_words_in_lines = []
+    joined_sorted_words = []
+    count = 0
+
+    for item in letter_sequences:
+        rows_list = letter_sequences.split("\n")
+    for item in rows_list:
+        word_rows_split.append(item.split(" "))
+    for item in word_rows_split:
+        sorted_words_line = []
+        for word in item:
+            sorted_words_line.append(sorted(word))
+        sorted_words_in_lines.append(sorted_words_line)
+    for item in sorted_words_in_lines:
+        joined_words = []
+        for list in item:
+            joined_words.append("".join(list))
+        joined_sorted_words.append(joined_words)
+    for item in joined_sorted_words:
+        sorted_lines.append(sorted(item))
+    for item in sorted_lines:
+        x = -1
+        y = 0
+        while x + 2 < len(item):
+            x += 1
+            y = x + 1
+            if item[x] == item[y]:
+                count += 1
+                x = -1
+                y = x + 1
+                break
+    print(len(rows_list))
+    valid_phrases_count = len(rows_list) - count
+    print(valid_phrases_count)
+    print(joined_sorted_words)
+
+
+passphrase_possibilities(my_data)
+
+
+# Day 3 -------------------------------------------------------------------------
+"""
 def number_of_steps(data_square):
 
     a = 0
@@ -108,7 +157,7 @@ def number_of_steps(data_square):
 
 
 number_of_steps(265149)
-
+"""
 
 # Day 2 ---------------------------------------------------------
 
