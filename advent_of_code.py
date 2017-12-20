@@ -1,10 +1,118 @@
 from aocd import get_data
 
-session="53616c7465645f5f4812c0eed899485e9e63507b133fcfbe379ae7ec1e1b079ec98f2fb252334cca442f15e78dd50899"
+#session="53616c7465645f5f4812c0eed899485e9e63507b133fcfbe379ae7ec1e1b079ec98f2fb252334cca442f15e78dd50899"
 #my_data = get_data(session, day=2, year=2017)
 #print(my_data)
 
-my_data = get_data(session, day=2, year=2017)
+#my_data = get_data(session, day=3, year=2017)
+#print(my_data)
+
+def number_of_steps(data_square):
+
+    a = 0
+    b = 0
+    c = 0
+    d = 0
+    side_adding_count = 1
+    block_move_lists = []
+    iteration = 1
+    block_number = 2
+    side_to_add_to = 1
+    side_adding_count_variables = []
+    for item in range(data_square):
+        side_adding_count_variables.append(item + 1)
+        side_adding_count_variables.append(item + 1)
+
+    while block_number < data_square:
+        if side_adding_count % 2 != 0:
+            if iteration % 2 != 0:
+                side_adding_count = side_adding_count_variables[iteration - 1]
+                while side_to_add_to % 2 != 0:
+                    while side_adding_count > 0:
+                        each_block_number = [0, 0, 0, 0, 0]
+                        a += 1
+                        each_block_number[0] = block_number
+                        each_block_number[1] = a
+                        each_block_number[2] = b
+                        each_block_number[3] = c
+                        each_block_number[4] = d
+                        block_move_lists.append(each_block_number)
+                        block_number += 1
+                        side_adding_count -= 1
+                    if side_adding_count == 0:
+                        side_to_add_to += 1
+                        iteration += 1
+                side_adding_count = side_adding_count_variables[iteration - 1]
+                while side_to_add_to % 2 == 0:
+                    while side_adding_count > 0:
+                        each_block_number = [0, 0, 0, 0, 0]
+                        b += 1
+                        each_block_number[0] = block_number
+                        each_block_number[1] = a
+                        each_block_number[2] = b
+                        each_block_number[3] = c
+                        each_block_number[4] = d
+                        block_move_lists.append(each_block_number)
+                        block_number += 1
+                        side_adding_count -= 1
+                    if side_adding_count == 0:
+                        side_to_add_to += 1
+                        iteration += 1
+            side_adding_count = side_adding_count_variables[iteration - 1]
+            if side_adding_count % 2 == 0:
+                if iteration % 2 != 0:
+                    side_adding_count = side_adding_count_variables[iteration - 1]
+                    while side_to_add_to % 2 != 0:
+                        while side_adding_count > 0:
+                            each_block_number = [0, 0, 0, 0, 0]
+                            c += 1
+                            each_block_number[0] = block_number
+                            each_block_number[1] = a
+                            each_block_number[2] = b
+                            each_block_number[3] = c
+                            each_block_number[4] = d
+                            block_move_lists.append(each_block_number)
+                            block_number += 1
+                            side_adding_count -= 1
+                        if side_adding_count == 0:
+                            iteration += 1
+                            side_to_add_to += 1
+                    while side_to_add_to % 2 == 0:
+                        side_adding_count = side_adding_count_variables[iteration - 1]
+                        while side_adding_count > 0:
+                            each_block_number = [0, 0, 0, 0, 0]
+                            d += 1
+                            each_block_number[0] = block_number
+                            each_block_number[1] = a
+                            each_block_number[2] = b
+                            each_block_number[3] = c
+                            each_block_number[4] = d
+                            block_move_lists.append(each_block_number)
+                            block_number += 1
+                            side_adding_count -= 1
+                        if side_adding_count == 0:
+                            iteration += 1
+                            side_to_add_to += 1
+                    side_adding_count = side_adding_count_variables[iteration - 1]
+
+    for item in block_move_lists:
+        if item[0] == data_square:
+            selected_moves = item
+
+    perpendicular_moves = max(selected_moves[1], selected_moves[3]) - min(selected_moves[1], selected_moves[3])
+    parallel_moves = max(selected_moves[2], selected_moves[4]) - min(selected_moves[2], selected_moves[4])
+    number_of_moves = perpendicular_moves + parallel_moves
+    print(block_move_lists)
+    print(number_of_moves)
+    return number_of_moves
+
+
+number_of_steps(265149)
+
+
+# Day 2 ---------------------------------------------------------
+
+"""my_data = get_data(session, day=2, year=2017)
 
 
 def checksum(input):
@@ -46,7 +154,7 @@ def checksum(input):
     print(sum)
 
 
-checksum(my_data)
+checksum(my_data)"""
 
 # Day 1 ---------------------------------------------------------------------------------------
 
