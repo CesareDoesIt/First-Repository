@@ -5,6 +5,36 @@ session="53616c7465645f5f4812c0eed899485e9e63507b133fcfbe379ae7ec1e1b079ec98f2fb
 #my_data = get_data(session, day=2, year=2017)
 #print(my_data)
 
+
+my_data = get_data(session, day=5, year=2017)
+#print(my_data)
+
+
+def escape_game(numbers):
+
+    list_of_strings = numbers.split("\n")
+    list_of_numbers = []
+    current_position = 0
+    count = 0
+
+    for item in list_of_strings:
+        list_of_numbers.append(int(item))
+
+    while current_position < len(list_of_numbers):
+            movement = list_of_numbers[current_position]
+            list_of_numbers[current_position] += 1
+            current_position = movement + current_position
+            count += 1
+
+    print(count)
+    print(list_of_numbers)
+
+
+escape_game(my_data)
+
+# Day 4 -----------------------------------------------------------------
+
+"""
 my_data = get_data(session, day=4, year=2017)
 #print(my_data)
 
@@ -52,9 +82,10 @@ def passphrase_possibilities(letter_sequences):
 
 
 passphrase_possibilities(my_data)
-
+"""
 
 # Day 3 -------------------------------------------------------------------------
+
 """
 def number_of_steps(data_square):
 
