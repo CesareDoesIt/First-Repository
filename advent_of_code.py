@@ -16,19 +16,27 @@ def escape_game(numbers):
     list_of_numbers = []
     current_position = 0
     count = 0
-
     for item in list_of_strings:
         list_of_numbers.append(int(item))
 
     while current_position < len(list_of_numbers):
             movement = list_of_numbers[current_position]
-            list_of_numbers[current_position] += 1
+            new_position_number = list_of_numbers[current_position]
+            if list_of_numbers[current_position] >= 3:
+                list_of_numbers[current_position] += -1
+                new_position_number = list_of_numbers[current_position]
+            if list_of_numbers[current_position] < 3:
+                if movement == new_position_number:
+                    list_of_numbers[current_position] += 1
             current_position = movement + current_position
             count += 1
+            if current_position >= len(list_of_numbers):
+                break
 
     print(count)
     print(list_of_numbers)
 
+# escape_game("0\n3\n0\n1\n-3")
 
 escape_game(my_data)
 
