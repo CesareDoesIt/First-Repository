@@ -13,13 +13,36 @@ session="53616c7465645f5f4812c0eed899485e9e63507b133fcfbe379ae7ec1e1b079ec98f2fb
 #"""
 
 my_data = get_data(session, day=7, year=2017)
-print(my_data)
+# print(my_data)
 
 
 def first_tower(discs):
-    pass
 
+    replaced_new_lines = discs.replace("\n", " " )
+    disc_names = []
+    letters = []
+    x = 0
 
+    for item in discs:
+        if item.isalpha():
+            letters.append(item)
+        else:
+            for item in letters:
+                if item.isalpha():
+                    disc_names.append("".join(letters))
+                    letters = []
+                    break
+
+    sorted_disc_names = sorted(disc_names)
+
+    while True:
+        if sorted_disc_names[x] != sorted_disc_names[x + 1]:
+            return sorted_disc_names[x]
+            break
+        else:
+            x += 2
+
+print(first_tower(my_data))
 
 #"""
 
