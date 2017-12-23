@@ -8,23 +8,94 @@ session="53616c7465645f5f4812c0eed899485e9e63507b133fcfbe379ae7ec1e1b079ec98f2fb
 #my_data = get_data(session, day=2, year=2017)
 #print(my_data)
 
+# Day 7---------------------------------------------------
+
+#"""
+
+my_data = get_data(session, day=7, year=2017)
+print(my_data)
+
+
+def first_tower(discs):
+    pass
+
+
+
+#"""
+
 # Day 6 ------------------------------------------------------------------
 
 """
 
 my_data = get_data(session, day=6, year=2017)
-#print(my_data)
+print(my_data)
 
 def block_mover(blocks):
 
-    string_numbers = my_data.split("\t")
+    string_numbers = blocks.split("\t")
     numbers = []
     for item in string_numbers:
         numbers.append(int(item))
+    iterations = []
+    iterations.append(numbers[:])
+    iterations_count = 0
 
-    
+    while True:
+        count = -1
+        maximum = max(numbers)
+        maximum_positions = []
+        while count + 1 <= len(numbers):
+            for number in numbers:
+                count += 1
+                if number == maximum:
+                    maximum_positions.append(count)
+            numbers[maximum_positions[0]] = 0
+            addition_point = maximum_positions[0] + 1
+            starting_point_to_end = len(numbers) - 1 - addition_point
+            if addition_point == len(numbers):
+                addition_point = 0
+                starting_point_to_end = -1
+                break
+        while starting_point_to_end >= 0:
+            if addition_point < len(numbers):
+                numbers[addition_point] = numbers[addition_point] + 1
+                starting_point_to_end -= 1
+                maximum -= 1
+                addition_point += 1
+            if maximum == 0:
+                break
+        addition_point = 0
+        while maximum > 0:
+            numbers[addition_point] = numbers[addition_point] + 1
+            maximum -= 1
+            addition_point += 1
+            if addition_point == len(numbers):
+                addition_point = 0
+        iterations_count += 1
+        for item in iterations:
+            if item == numbers:
+                iterations.append(numbers[:])
+                return iterations, numbers
+        iterations.append(numbers[:])
 
-block_mover(my_data)
+
+def part_two(block_mover_data):
+
+    numbers = block_mover_data[1]
+    iterations = block_mover_data[0]
+    count = 0
+    duplicate_positions = []
+
+    for item in iterations:
+        if item == numbers:
+            duplicate_positions.append(count)
+        count += 1
+
+    return (duplicate_positions[1] - duplicate_positions[0])
+
+#print(block_mover("0\t2\t4\t1"))
+#print(block_mover(my_data))
+print(part_two(block_mover(my_data)))
 
 """
 
@@ -123,6 +194,7 @@ passphrase_possibilities(my_data)
 
 # Day 3 -------------------------------------------------------------------------
 
+"""
 
 def number_of_steps(data_square):
 
@@ -220,6 +292,7 @@ number_of_steps(265149)
 # 265149 Time before edits = 0:00:02.584573
 # 265149 Time after edits  = 0:00:00.310983
 
+"""
 
 # Day 2 ---------------------------------------------------------
 
