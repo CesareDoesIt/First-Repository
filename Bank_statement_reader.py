@@ -1,13 +1,11 @@
-# Figure out negative numbers when I do the checking/savings account. Have a statement for \-.
-
 import openpyxl
 import PyPDF2
 import re
 
 
-def export_page_data():
+def export_page_data(file_name):
 
-    pdfFileObj = open("/home/cesare/Documents/11_23_17.pdf", "rb")
+    pdfFileObj = open(file_name, "rb")
     pdfreader = PyPDF2.PdfFileReader(pdfFileObj)
     number_of_pages = pdfreader.numPages
     usable_pages = []
@@ -122,7 +120,9 @@ def export_to_excel(dates, descriptions, dollar_amounts):
     wb.save('/home/cesare/Documents/exported_bank_statement.xlsx')
 
 
-all_pages = export_page_data()
+file_input = input("What is the file name?")
+file_name = "/home/cesare/Documents/{}.pdf".format(file_input)
+all_pages = export_page_data(file_name)
 usable_text = extract_usable_text(all_pages)
 usable_dates = extract_dates(usable_text)
 usable_dollar_amounts = extract_dollar_amounts(usable_text)
