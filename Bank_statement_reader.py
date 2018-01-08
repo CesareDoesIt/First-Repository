@@ -21,7 +21,6 @@ def export_page_data(file_name):
         if "Description$ Amount" not in item:
             del usable_pages[usable_pages.index(item)]
 
-    print(usable_pages)
     return usable_pages
 
 
@@ -49,7 +48,6 @@ def extract_usable_text(extracted_pages):
 
     combined_text = "".join(edited_text)
 
-    print(combined_text)
     return combined_text
 
 
@@ -66,7 +64,6 @@ def extract_descriptions(text, dates, dollar_amounts):
     values_replaced = values_replaced.split("XxXxX")
     values_replaced = values_replaced[:len(values_replaced)-1]
 
-    print(values_replaced)
     return values_replaced
 
 
@@ -78,7 +75,6 @@ def extract_dollar_amounts(text):
     for item in string_dollar_amounts:
         float_dollar_amounts.append(float(item))
 
-    print(float_dollar_amounts)
     return string_dollar_amounts, float_dollar_amounts
 
 
@@ -101,7 +97,6 @@ def extract_dates(text, year):
     for item in shortened_dates:
         date_years.append(item + date_year_string)
 
-    print(date_years)
     return date_years, shortened_dates
 
 
@@ -119,11 +114,11 @@ def export_to_excel(dates, descriptions, dollar_amounts):
         row += 1
     row = 2
     for item in descriptions:
-        sheet.cell(row=row, column=3, value=item)
+        sheet.cell(row=row, column=2, value=item)
         row += 1
     row = 2
     for item in dollar_amounts:
-        sheet.cell(row=row, column=4, value=item).number_format = "$#,##0.00"
+        sheet.cell(row=row, column=3, value=item).number_format = "$#,##0.00"
         row += 1
 
     wb.save('/home/cesare/Documents/exported_bank_statement.xlsx')
