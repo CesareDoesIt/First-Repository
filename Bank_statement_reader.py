@@ -1,6 +1,7 @@
 import openpyxl
 import PyPDF2
 import re
+from datetime import datetime,date
 
 
 def export_page_data(file_name):
@@ -81,21 +82,27 @@ def extract_dollar_amounts(text):
     return string_dollar_amounts, float_dollar_amounts
 
 
-def extract_dates(text):
+def extract_dates(text, year):
 
     improper_dates = re.findall("\D\d/\d\d|\D\d\d/\d\d|\d+/\d\d", text)
     shortened_dates = []
     shortened_dates.append(improper_dates[0])
+    date_years = []
+    date_year_string = '/' + year[-2] + year[-1]
 
     for item in improper_dates:
         if re.search('[a-zA-Z]', item):
             shortened_dates.append(item[1:])
         else:
             shortened_dates.append(item[2:])
+
     del shortened_dates[1]
 
-    print(shortened_dates)
-    return shortened_dates
+    for item in shortened_dates:
+        date_years.append(item + date_year_string)
+
+    print(date_years)
+    return date_years, shortened_dates
 
 
 def export_to_excel(dates, descriptions, dollar_amounts):
@@ -104,9 +111,11 @@ def export_to_excel(dates, descriptions, dollar_amounts):
     sheet = wb.get_sheet_by_name('Sheet1')
 
     row = 2
+    formatter_string = "%m/%d/%y"
 
     for item in dates:
-        sheet.cell(row=row, column=1, value=item)
+        datetime_object = datetime.strptime(item, formatter_string)
+        sheet.cell(row=row, column=1, value=datetime_object.date())
         row += 1
     row = 2
     for item in descriptions:
@@ -124,8 +133,8 @@ file_input = input("What is the file name?")
 file_name = "/home/cesare/Documents/{}.pdf".format(file_input)
 all_pages = export_page_data(file_name)
 usable_text = extract_usable_text(all_pages)
-usable_dates = extract_dates(usable_text)
+usable_dates = extract_dates(usable_text, file_input)
 usable_dollar_amounts = extract_dollar_amounts(usable_text)
-usable_descriptions = extract_descriptions(usable_text, usable_dates, usable_dollar_amounts[0])
+usable_descriptions = extract_descriptions(usable_text, usable_dates[1], usable_dollar_amounts[0])
 
-export_to_excel(usable_dates, usable_descriptions, usable_dollar_amounts[1])
+export_to_excel(usable_dates[0], usable_descriptions, usable_dollar_amounts[1])
