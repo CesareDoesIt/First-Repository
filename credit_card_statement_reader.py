@@ -1,3 +1,8 @@
+#This program uses a downloaded chase bank credit card statement PDF. The program reads the file, filters
+#out the dates, descriptions, and dollar amounts of transactions, then commits them to an XLSX file. It is
+#used for quickly creating a spreadsheet of transactions for tracking banking and budgeting information.
+
+
 import openpyxl
 import PyPDF2
 import re

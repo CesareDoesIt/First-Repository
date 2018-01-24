@@ -1,3 +1,7 @@
+#This program is for calculating the peak benefit of paying extra on a mortgage vs. putting your money
+#into a long term investment.
+
+
 from appJar import gui
 
 

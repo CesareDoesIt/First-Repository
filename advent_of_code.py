@@ -1,3 +1,8 @@
+#This is my first attempt at an Advent of Code challenge. I have completed both halves of five problems and
+#the first half of two problems. I stopped when the holidays arrived and have not gotten back to it due to
+#searching for jobs.
+
+
 from aocd import get_data
 import re
 from datetime import datetime

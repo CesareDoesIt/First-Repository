@@ -1,3 +1,6 @@
+#This is a temporary workbook I used for completing the Codecademy Python course.
+
+
 class Fruit(object):
   """A class that makes various tasty fruits."""
   def __init__(self, name, color, flavor, poisonous):
